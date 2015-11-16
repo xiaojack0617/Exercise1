@@ -1,0 +1,168 @@
+﻿@model JackXiaoASP.Models.Customer
+
+
+@section scripts
+
+{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/ViewModels/IndexViewModel.js"></script>
+
+    <script type="text/javascript">
+
+        /*///////---------------------------------------------------------
+        var IndexViewModel = function () {
+            var self = this;
+
+            self.CustomerNameValidation.extend({
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+
+            });
+
+            self.ContactNameValidation.extend({
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+            });
+
+            self.AddressValidation.extend({
+                required: true,
+
+            });
+
+            self.CityValidation.extend({
+                required: true,
+                minLength: 2,
+                maxLength: 20,
+            });
+
+            self.CountryValidation.extend({
+                required: true,
+                minLength: 2,
+                maxLength: 30,
+            });
+
+
+            self.PostalCodeValidation.extend({
+                required: true,
+                minLength: 4,
+                maxLength: 10,
+            });
+
+           
+            self.IsAdd = ko.observable();
+            
+        }
+
+        var indexViewModel = new IndexViewModel();
+        ko.validation.group(indexViewModel);
+
+        var forceValidation = function () {
+            //is viewmodel valid?
+            if (!indexViewModel.isValid()) {
+                //shows error messages for invalid properties
+                houseHold.errors.showAllMessages();
+            }
+            //it looks like you need to return true else checkbox doesn't stay checked
+            return true;
+        }
+
+        var vm = {
+            indexViewModel: indexViewModel,
+            forceValidation: forceValidation
+        }
+
+        ko.applyBindings(vm);
+        */
+       
+
+        (function () {
+
+            var vm = new ksj.validation.IndexViewModel();
+            ko.applyBindings(vm);
+
+
+
+        })();
+       
+
+    </script>
+
+
+}
+
+<h2>Add A New Customer</h2>
+
+
+
+
+<h3 style="color:red">This Page Using Knockout Validation!</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CustomerName, new { data_bind = "value:CustomerNameValidation" })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.ContactName, new { data_bind = "value:ContactNameValidation" })
+
+
+                @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Address, new { data_bind = "value:AddressValidation" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.City, new { data_bind = "value:CityValidation" })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PostalCode, new { data_bind = "value:PostalCodeValidation" })
+                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Country, new { data_bind = "value:CountryValidation" })
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add A New Customer" data-bind="checked:indexViewModel.IsAdd, click:forceValidation" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

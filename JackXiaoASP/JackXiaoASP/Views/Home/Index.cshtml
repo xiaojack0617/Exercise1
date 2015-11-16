@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="jumbotron">
+    <h1>Wellcome To Our Customers Page</h1>
+    
+    <br />
+    <p><a href="~/Customers/Index" style="width:300px" class="btn btn-primary btn-lg">Show All Customers &raquo;</a></p>
+ 
+    <br />
+
+    <p><a href="~/Customers/Create" style="width:300px" class="btn btn-primary btn-lg">Add A New Customer &raquo;</a></p>
+
+
+</div>
+
+<h3 style="color:red">The Customers Detail's Page Using Knockout Mapping!</h3>
+<h3 style="color:red">The Add New Customer's Page Using Knockout Validation!!</h3>
+
+<h3 style="color:red">Below Links Using Ajax!</h3>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+@Ajax.ActionLink("Show All Customers By Ajax", "All","Home", new AjaxOptions()
+{
+
+    HttpMethod = "GET",
+    UpdateTargetId = "divCustomer",
+    InsertionMode = InsertionMode.Replace
+
+
+}, new { @class = "glyphicon glyphicon-list-alt" }
+)
+
+<span style="color:blue">|</span>
+@Ajax.ActionLink("Add A Customer By Ajax", "Add", "Home", new AjaxOptions()
+{
+
+    HttpMethod = "GET",
+    UpdateTargetId = "divCustomer",
+    InsertionMode = InsertionMode.Replace
+    
+
+
+}, new { @class = "glyphicon glyphicon-plus" } 
+)
+
+
+<span style="color:blue">|</span>
+@Ajax.ActionLink("Hide Ajax View", "Hide", "Home", new AjaxOptions()
+{
+
+    HttpMethod = "GET",
+    UpdateTargetId = "divCustomer",
+    InsertionMode = InsertionMode.Replace
+
+
+}, new { @class = "glyphicon glyphicon-trash" }
+)
+
+
+<div id="divCustomer">
+</div>
+
+
+
+
+

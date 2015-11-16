@@ -1,0 +1,100 @@
+﻿@model JackXiaoASP.CustumerViewModel.CustomerViewModel
+
+@using System.Web.Script.Serialization;
+@using System.Activities.Expressions;
+
+
+@{
+    ViewBag.Title = "Customers Details";
+}
+
+@{string data = new JavaScriptSerializer().Serialize(Model);}
+
+
+@section scripts
+{
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/customerviewmodel.js"></script>
+    <script type="text/javascript">
+
+         var customerViewModel = new CustomerViewModel(@Html.Raw(data));
+         ko.applyBindings(customerViewModel);
+    </script>
+
+}
+
+<h2>@ViewBag.Title</h2>
+<h3 style="color:red">This Page Using Knockout Mapping!</h3>
+
+<p data-bind="text:MessageToClient"></p>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label style="color:red">Customer Name:</label>
+        </dt>
+
+        <dd>
+            <span data-bind="text:CustomerName"></span>
+        </dd>
+
+        <dt>
+            <label style="color:red">Contact Name:</label>
+           
+        </dt>
+
+        <dd>
+            <span data-bind="text:ContactName"></span>
+           
+        </dd>
+
+        <dt>
+            <label style="color:red">Address:</label>
+
+            
+        </dt>
+
+        <dd>
+            <span data-bind="text:Address"></span>
+           
+        </dd>
+
+        <dt>
+            <label style="color:red">City:</label>
+        
+        </dt>
+
+        <dd>
+            <span data-bind="text:City"></span>
+          
+        </dd>
+
+        <dt>
+            <label style="color:red">Postal Code:</label>
+           
+        </dt>
+
+        <dd>
+            <span data-bind="text:PostalCode"></span>
+           
+        </dd>
+
+        <dt>
+            <label style="color:red">Country:</label>
+           
+        </dt>
+
+        <dd>
+            <span data-bind="text:Country"></span>
+           
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
